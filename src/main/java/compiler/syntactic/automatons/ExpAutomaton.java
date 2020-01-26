@@ -14,8 +14,8 @@ public class ExpAutomaton {
 
         Transition t = new Transition();
 
-        Automaton EXP = new Automaton();
-        Automaton EB = new Automaton();
+        Automaton EXP = new Automaton("EXP");
+        Automaton EB = new Automaton("EB");
 
         State exp1 = new State();
         State exp2 = new State();

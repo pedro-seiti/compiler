@@ -12,7 +12,7 @@ public class ReturnAutomaton {
 
         Transition t;
 
-        Automaton _return = new Automaton();
+        Automaton _return = new Automaton("RETURN");
 
         State return1 = new State();
         State return2 = new State();

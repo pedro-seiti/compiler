@@ -22,7 +22,7 @@ public class Startup {
 		//File file = new File(args[0]);
 		
 		try {
-			InputStream in = Startup.class.getResourceAsStream("/test/testeErroSintatico.txt");
+			InputStream in = Startup.class.getResourceAsStream("/test/testeSintatico.txt");
 			Reader reader = new InputStreamReader(in, encoding);
 			Reader buffer = new BufferedReader(reader);
 			handleInputStream(buffer);
@@ -41,8 +41,8 @@ public class Startup {
 //			System.out.println(ch);
 //		}
 		
-		ArrayList<ArrayList<String>> lines = new ArrayList<ArrayList<String>>();
-		ArrayList<String> tokens = new ArrayList<String>();
+		ArrayList<ArrayList<Token>> lines = new ArrayList<ArrayList<Token>>();
+		ArrayList<Token> tokens = new ArrayList<Token>();
 		
 		Tokenizer tokenizer = new Tokenizer();
 		
@@ -58,26 +58,32 @@ public class Startup {
 				r = reader.read();
 				continue;
 			} else {
-				if (!tokenizer.reclassifiedChar.isEmpty()) {
+				if (tokenizer.reclassifiedChar != null && !tokenizer.reclassifiedChar.Token.isEmpty()) {
 					tokens.remove(tokens.size() - 1);
-					tokens.add(tokenizer.reclassifiedChar);
-					tokenizer.reclassifiedChar = "";
-					tokenizer.specialChar = "";
+					Token t = new Token(tokenizer.reclassifiedChar);
+					tokens.add(t);
+					tokenizer.reclassifiedChar = null;
+					tokenizer.specialChar = null;
 				} else {
 					if (!tokenizer.token.Token.toString().equals("")) {
-						tokens.add(tokenizer.token.Token.toString());
+						Token t = new Token(tokenizer.token);
+						tokens.add(t);
 					}
 					
-					if (!tokenizer.specialChar.isEmpty()) {
-						tokens.add(tokenizer.specialChar);
-						tokenizer.specialChar = "";
+					if (tokenizer.specialChar != null && !tokenizer.specialChar.Token.isEmpty()) {
+						Token t = new Token(tokenizer.specialChar);
+						tokens.add(t);
+						tokenizer.specialChar = null;
 					}
 				}
 			}
 			
 			if (tokenizer.isLineFinished) {
 				lines.add(tokens);
-				tokens = new ArrayList<String>();
+				for (Token t : tokens) {
+					System.out.println(t.Token);
+				}
+				tokens = new ArrayList<Token>();
 				tokenizer.isLineFinished = false;
 				line += 1;
 			}
@@ -85,9 +91,10 @@ public class Startup {
 			r = reader.read();
 		}
 		
-		if (tokenizer.handleCharacter((char) 32)) {
+		if (tokenizer.handleCharacter((char) 32, line)) {
 			if (!tokenizer.token.Token.toString().equals("")) {
-				tokens.add(tokenizer.token.Token.toString());
+				Token t = new Token(tokenizer.token);
+				tokens.add(t);
 				lines.add(tokens);
 			}
 		}

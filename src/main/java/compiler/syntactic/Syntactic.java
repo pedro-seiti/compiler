@@ -2,9 +2,7 @@ package compiler.syntactic;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import Classes.Memoria;
-import Sintaxe.TabelaSimbolos;
+import compiler.model.Token;
 import compiler.syntactic.automatons.AssignAutomaton;
 import compiler.syntactic.automatons.BStatementAutomaton;
 import compiler.syntactic.automatons.DefAutomaton;
@@ -23,18 +21,19 @@ public class Syntactic {
 	
 	private static Automaton lineAutomaton;
     
-    public static boolean analyse(ArrayList<ArrayList<String>> lines) {
+    public static boolean analyse(ArrayList<ArrayList<Token>> lines) {
     	initialize();
     	
-    	ArrayList<String> allLines = new ArrayList<String>();
-   		for (ArrayList<String> line : lines) {
+    	ArrayList<Token> allLines = new ArrayList<Token>();
+   		for (ArrayList<Token> line : lines) {
    			allLines.addAll(line); 
    		}
     	Result result = lineAutomaton.runAutomaton(allLines);
     	
     	if (!result.isSuccess || !result.remainingLine.isEmpty()) {
-            String error = result.remainingLine.get(0);
-            System.out.println(String.format("Syntactic error: %s", error));
+            String error = result.remainingLine.get(0).Token;
+            int errorLine = result.remainingLine.get(0).line;
+            System.out.println(String.format("Syntactic error: %s %d", error, errorLine));
             return false;
         }
     	

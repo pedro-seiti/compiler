@@ -13,7 +13,7 @@ public class GoSubAutomaton {
 
         Transition t;
 
-        Automaton gosub = new Automaton();
+        Automaton gosub = new Automaton("GOSUB");
 
         State gosub1 = new State();
         State gosub2 = new State();

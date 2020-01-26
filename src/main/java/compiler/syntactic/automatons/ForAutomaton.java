@@ -13,7 +13,7 @@ public class ForAutomaton {
 
         Transition t;
 
-        Automaton _for = new Automaton();
+        Automaton _for = new Automaton("FOR");
 
         State for1 = new State();
         State for2 = new State();

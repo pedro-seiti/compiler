@@ -13,7 +13,7 @@ public class GoToAutomaton {
 
 	        Transition t;
 
-	        Automaton _goto = new Automaton();
+	        Automaton _goto = new Automaton("GOTO");
 
 	        State goto1 = new State();
 	        State goto2 = new State();

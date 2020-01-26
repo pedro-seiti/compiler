@@ -13,7 +13,7 @@ public class IfAutomaton {
 
         Transition t;
 
-        Automaton _if = new Automaton();
+        Automaton _if = new Automaton("IF");
 
         State if1 = new State();
         State if2 = new State();

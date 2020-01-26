@@ -1,8 +1,5 @@
 package compiler.lexico;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import compiler.model.Token;
 
 public class Tokenizer {
@@ -14,13 +11,11 @@ public class Tokenizer {
 	private boolean inString = false;
 	
 	public Token token = new Token();
-	public String specialChar = "";
-	public String reclassifiedChar = "";
+	public Token specialChar = null;
+	public Token reclassifiedChar = null;
 	
 	public boolean isTokenFinished = false;
 	public boolean isLineFinished = false;
-	
-	private boolean keepToken = false;
 	
 	public boolean handleCharacter(char c, int line) throws Exception {
 		
@@ -46,7 +41,7 @@ public class Tokenizer {
                     tokenBuilder = new StringBuilder();
                     
                     if (token.reclassify()) {
-                    	reclassifiedChar = token.reclassifiedToken;
+                    	reclassifiedChar = token;
                     }
                     token.lastToken = token.Token;
                     isTokenFinished = true;
@@ -91,10 +86,13 @@ public class Tokenizer {
                 isTokenFinished = true;
                 
                 if (token.reclassify(s)) {
-                	reclassifiedChar = token.reclassifiedToken;
+                	reclassifiedChar = token;
                 }
                 token.lastToken = s;
-                specialChar = s;
+                
+                specialChar = new Token();
+                specialChar.Token = s;
+                specialChar.line = line;
                 
             }
 

@@ -13,7 +13,7 @@ public class RemarkAutomaton {
 
         Transition t;
 
-        Automaton remark = new Automaton();
+        Automaton remark = new Automaton("REMARK");
 
         State rem1 = new State();
         State rem2 = new State();

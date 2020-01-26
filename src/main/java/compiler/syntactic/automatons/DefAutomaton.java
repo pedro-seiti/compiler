@@ -13,7 +13,7 @@ public class DefAutomaton {
 
         Transition t;
 
-        Automaton def = new Automaton();
+        Automaton def = new Automaton("DEF");
 
         State def1 = new State();
         State def2 = new State();

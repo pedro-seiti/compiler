@@ -13,7 +13,7 @@ public class AssignAutomaton {
 
         Transition t;
 
-        Automaton assign = new Automaton();
+        Automaton assign = new Automaton("ASSIGN");
 
         State assign1 = new State();
         State assign2 = new State();

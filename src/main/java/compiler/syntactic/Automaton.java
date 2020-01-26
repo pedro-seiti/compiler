@@ -11,19 +11,23 @@ public class Automaton {
 
 	public State initialState;
 	public List<State> states;
+	public String name;
 
-	public Automaton() {
+	public Automaton(String name) {
+		this.name = name;
 		this.states = new ArrayList<State>();
 	}
 
-	public Result runAutomaton(ArrayList<String> tokens) {
+	public Result runAutomaton(ArrayList<Token> tokens) {
 
 		boolean error = false;
 		State current = initialState;
 
-		ArrayList<String> remainingLine = new ArrayList<String>(tokens);
+		ArrayList<Token> remainingLine = new ArrayList<Token>(tokens);
 
 		while (!current.isEnd && !error) {
+			
+			System.out.println(current.toString() + " " + remainingLine.get(0).Token + " " + name);
 
 			if (!this.states.contains(current)) {
 				return new Result(remainingLine, false);
@@ -41,7 +45,7 @@ public class Automaton {
 				}
 
 				else if (TransitionType.LITERAL.equals(t.transitionType)) {
-					if (remainingLine.get(0).equals(t.transitionValue)) {
+					if (remainingLine.get(0).Token.equals(t.transitionValue)) {
 
 						current = t.nextState;
 						remainingLine.remove(0);
@@ -49,14 +53,14 @@ public class Automaton {
 						break;
 					}
 				} else if (TransitionType.TOKEN.equals(t.transitionType)) {
-					if (TokenComparator.areSameTokenTypes(remainingLine.get(0), t.transitionToken)) {
+					if (TokenComparator.areSameTokenTypes(remainingLine.get(0).Token, t.transitionToken)) {
 						current = t.nextState;
 						remainingLine.remove(0);
 						error = false;
 						break;
 					}
 				} else if (TransitionType.REGEX.equals(t.transitionType)) {
-					if (remainingLine.get(0).matches(t.transitionValue)) {
+					if (remainingLine.get(0).Token.matches(t.transitionValue)) {
 						current = t.nextState;
 						remainingLine.remove(0);
 						error = false;

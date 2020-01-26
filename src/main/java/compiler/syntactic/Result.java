@@ -7,11 +7,11 @@ import compiler.model.Token;
 
 public class Result {
 
-	public ArrayList<String> remainingLine;
+	public ArrayList<Token> remainingLine;
 	
     public boolean isSuccess;
 
-    public Result(ArrayList<String> remainingLine, boolean isSuccess) {
+    public Result(ArrayList<Token> remainingLine, boolean isSuccess) {
         this.remainingLine = remainingLine;
         this.isSuccess = isSuccess;
     }

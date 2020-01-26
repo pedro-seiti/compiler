@@ -1,14 +1,14 @@
-R:      LET X = 12
-        LET X = ((200 + X) / FN G(233))*25
-        LET A3 = 0
-L1:     LET A3 = A3 + X
-        PRINT X, A3
-        FOR Y = -5 TO 10
-        LET Z = X - 1
-N:      NEXT Y
-        PRINT "Imprimindo uma string!"
-        DEF FN G(X) = X * X / 2
-        IF X = 0 THEN STOP
-        IF Y > 3 THEN R
-        GO TO L1
-        END
+10      LET X = 12
+20      LET X = ((200 + X) / FN G(233))*25
+30      LET A3 = 0
+40      LET A3 = A3 + X
+50      PRINT X, A3
+60      FOR Y = -5 TO 10
+70      LET Z = X - 1
+80      NEXT Y
+90      PRINT "Imprimindo uma string!"
+100     DEF FN G(X) = X * X / 2
+110     IF X = 0 THEN STOP
+120     IF Y > 3 THEN R
+130     GO TO L1
+140     END

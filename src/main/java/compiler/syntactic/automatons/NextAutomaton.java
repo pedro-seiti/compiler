@@ -13,7 +13,7 @@ public class NextAutomaton {
 
         Transition t;
 
-        Automaton next = new Automaton();
+        Automaton next = new Automaton("NEXT");
 
         State next1 = new State();
         State next2 = new State();

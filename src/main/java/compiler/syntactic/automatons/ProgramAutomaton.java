@@ -13,12 +13,13 @@ public class ProgramAutomaton {
 
         Transition t;
 
-        Automaton program = new Automaton();
+        Automaton program = new Automaton("PROGRAM");
 
         State program1 = new State();
         State program2 = new State();
         State program3 = new State();
-        program3.isEnd = true;
+        State program4 = new State();
+        program4.isEnd = true;
 
         t = new Transition();
         t.transitionType = TransitionType.AUTOMATON;
@@ -34,15 +35,21 @@ public class ProgramAutomaton {
 
         t = new Transition();
         t.transitionType = TransitionType.TOKEN;
-        t.transitionToken = TokenType.END;
+        t.transitionToken = TokenType.DIGIT;
         t.nextState = program3;
         program2.addTransition(t);
 
+        t = new Transition();
+        t.transitionType = TransitionType.TOKEN;
+        t.transitionToken = TokenType.END;
+        t.nextState = program4;
+        program3.addTransition(t);
 
         program.initialState = program1;
         program.states.add(program1);
         program.states.add(program2);
         program.states.add(program3);
+        program.states.add(program4);
 
         automaton = program;
     }

@@ -13,7 +13,7 @@ public class PrintAutomaton {
 
         Transition t;
 
-        Automaton print = new Automaton();
+        Automaton print = new Automaton("PRINT");
 
         State print1 = new State();
         State print2 = new State();

@@ -32,7 +32,7 @@ public class TokenComparator {
         	return true;
         }
 
-        else if(token.matches("[A-Z]\\d?") && TokenType.IDENTIFIER.equals(transitionTokenType)) {
+        else if(token.matches("[A-Z]*\\d?") && TokenType.IDENTIFIER.equals(transitionTokenType)) {
         	return true;
         }
 
