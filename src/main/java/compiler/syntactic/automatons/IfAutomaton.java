@@ -56,7 +56,7 @@ public class IfAutomaton {
 
         t = new Transition();
         t.transitionType = TransitionType.TOKEN;
-        t.transitionToken = TokenType.IDENTIFIER;
+        t.transitionToken = TokenType.DIGIT;
         t.nextState = if7;
         if6.addTransition(t);
 

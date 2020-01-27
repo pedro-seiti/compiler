@@ -11,6 +11,9 @@ import java.io.Reader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
+import compiler.generator.AssemblyLine;
+import compiler.generator.CodeGenerator;
+import compiler.generator.util.RedundancyHelper;
 import compiler.lexico.Tokenizer;
 import compiler.model.Token;
 import compiler.syntactic.Syntactic;
@@ -22,7 +25,7 @@ public class Startup {
 		//File file = new File(args[0]);
 		
 		try {
-			InputStream in = Startup.class.getResourceAsStream("/test/testeSintatico.txt");
+			InputStream in = Startup.class.getResourceAsStream("/test/testeSintaticoOK.txt");
 			Reader reader = new InputStreamReader(in, encoding);
 			Reader buffer = new BufferedReader(reader);
 			handleInputStream(buffer);
@@ -80,9 +83,6 @@ public class Startup {
 			
 			if (tokenizer.isLineFinished) {
 				lines.add(tokens);
-				for (Token t : tokens) {
-					System.out.println(t.Token);
-				}
 				tokens = new ArrayList<Token>();
 				tokenizer.isLineFinished = false;
 				line += 1;
@@ -101,7 +101,50 @@ public class Startup {
 		
 		boolean isSyntacticSuccess = Syntactic.analyse(lines);
 		
+		if (isSyntacticSuccess) {
+			lines = RedundancyHelper.addZeros(lines);
+			lines = RedundancyHelper.addStep(lines);
+		}
+		
+		CodeGenerator.translateToAssembly(lines);
+		
+		for (AssemblyLine l : CodeGenerator.codigoAssembly) {
+            printLinhaAssembly(l);
+        }
+		
+		CodeGenerator.ParaMaquina();
+		
+		for (AssemblyLine l : CodeGenerator.codigoAssembly) {
+            printLinhaMaquina(l);
+        }
+		
 		System.out.print("done");
 	}
+	
+	private static void printLinhaAssembly(AssemblyLine l) {
+
+		String ANSI_RESET = "\u001B";
+        System.out.println(ANSI_RESET);
+        String s = "";
+
+        if(!l.Label.equals("!")) {
+            s = l.Label;
+        }
+        int i = s.length();
+        while(i <= 9) {
+            s = s.concat(" ");
+            i++;
+        }
+
+        System.out.print(String.format("%s%s %s",s,l.Instrucao,l.Operador));
+    }
+	
+	private static void printLinhaMaquina(AssemblyLine l) {
+		String ANSI_RESET = "\u001B";
+        System.out.println(ANSI_RESET);
+        String s = "";
+
+        System.out.print(String.format("%s%s%s",s,l.Instrucao,l.Operador));
+    }
 
 }

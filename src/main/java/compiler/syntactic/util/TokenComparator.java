@@ -13,6 +13,10 @@ public class TokenComparator {
 	private static List<String> COMPARATORS = new ArrayList<String>(
 		Arrays.asList("<>", "=", ">", "<", "<=", ">=")
 	);
+	
+	private static List<String> SIGNS = new ArrayList<String>(
+			Arrays.asList("(", ")", ",", ":")
+		);
 
 	public static boolean areSameTokenTypes(String token, TokenType transitionTokenType) {
 
@@ -74,6 +78,10 @@ public class TokenComparator {
 
         else if(token.startsWith("\"") && token.endsWith("\"")) {
         	return TokenType.STRING;
+        }
+		
+        else if(SIGNS.contains(token)) {
+        	return TokenType.SIGN;
         }
 		
         else return TokenType.INVALID;

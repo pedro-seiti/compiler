@@ -8,5 +8,6 @@ public enum TokenType {
 	STRING,
 	STOP,
 	END,
-	INVALID;
+	INVALID,
+	SIGN;
 }

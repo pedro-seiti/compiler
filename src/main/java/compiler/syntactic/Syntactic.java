@@ -6,6 +6,7 @@ import compiler.model.Token;
 import compiler.syntactic.automatons.AssignAutomaton;
 import compiler.syntactic.automatons.BStatementAutomaton;
 import compiler.syntactic.automatons.DefAutomaton;
+import compiler.syntactic.automatons.EndAutomaton;
 import compiler.syntactic.automatons.ExpAutomaton;
 import compiler.syntactic.automatons.ForAutomaton;
 import compiler.syntactic.automatons.GoSubAutomaton;
@@ -75,8 +76,9 @@ public class Syntactic {
         automata.add(ReturnAutomaton.automaton);
 
         BStatementAutomaton.initialize(automata);
+        EndAutomaton.initialize();
 
-        ProgramAutomaton.initialize(BStatementAutomaton.automaton);
+        ProgramAutomaton.initialize(BStatementAutomaton.automaton, EndAutomaton.automaton);
 
         lineAutomaton = ProgramAutomaton.automaton;
     }

@@ -28,7 +28,7 @@ public class GoToAutomaton {
 
 	        t = new Transition();
 	        t.transitionType = TransitionType.TOKEN;
-	        t.transitionToken = TokenType.IDENTIFIER;
+	        t.transitionToken = TokenType.DIGIT;
 	        t.nextState = goto3;
 	        goto2.addTransition(t);
 

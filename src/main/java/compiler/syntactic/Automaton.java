@@ -26,8 +26,6 @@ public class Automaton {
 		ArrayList<Token> remainingLine = new ArrayList<Token>(tokens);
 
 		while (!current.isEnd && !error) {
-			
-			System.out.println(current.toString() + " " + remainingLine.get(0).Token + " " + name);
 
 			if (!this.states.contains(current)) {
 				return new Result(remainingLine, false);
@@ -74,6 +72,10 @@ public class Automaton {
 						current = t.nextState;
 						error = false;
 						break;
+					} else {
+						if (name == "PROGRAM" && t.transitionAutomaton.name == "BSTATEMENT") {
+							continue;
+						}
 					}
 				} else if (TransitionType.EMPTY.equals(t.transitionType)) {
 					current = t.nextState;

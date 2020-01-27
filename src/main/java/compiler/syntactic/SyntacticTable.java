@@ -26,19 +26,19 @@ public class SyntacticTable {
             i++;
         }
 
-        isSuccess = searchInLabels(tempCode);
+        isSuccess = addLabels(tempCode);
 
         if(!isSuccess) {
             return false;
         }
 
-        isSuccess = searchInFunctions(tempCode);
+        isSuccess = addFunctions(tempCode);
 
         if(!isSuccess) {
             return false;
         }
 
-        isSuccess = searchInVariables(tempCode);
+        isSuccess = addVariables(tempCode);
 
         if(!isSuccess) {
             return false;
@@ -111,7 +111,7 @@ loop:       for (Identifier i2:IDENT_DECLARE) {
     }
 
     
-    public static boolean searchInLabels(ArrayList<ArrayList<Token>> code) {
+    public static boolean addLabels(ArrayList<ArrayList<Token>> code) {
 
         boolean isSuccess = true;
 
@@ -119,18 +119,9 @@ loop:       for (Identifier i2:IDENT_DECLARE) {
 
         	Token t = l.get(0);
 
-            if(TokenComparator.getTokenType(t.Token) == TokenType.IDENTIFIER) {
+            if(TokenComparator.getTokenType(t.Token) == TokenType.DIGIT) {
             	isSuccess = addIdentifier(t, true, Identifier.LABEL);
                 l.remove(0);
-                l.remove(0);
-
-                String s = l.get(0).Token;
-
-                if(s.equals("DATA") || s.equals("DEF") || s.equals("RETURN") || s.equals("END") || s.equals("REM") || s.equals("NEXT")) {
-                	isSuccess = false;
-                    System.out.println(String.format("Error: \"%s\" no labels allowed (line %d)", s, t.line));
-                }
-
             }
 
             if(!isSuccess) {
@@ -160,7 +151,7 @@ loop:       for (Identifier i2:IDENT_DECLARE) {
         return true;
     }
 
-    public static boolean searchInFunctions(ArrayList<ArrayList<Token>> code) {
+    public static boolean addFunctions(ArrayList<ArrayList<Token>> code) {
 
         boolean isSuccess = true;
 
@@ -214,7 +205,7 @@ loop:       for (Identifier i2:IDENT_DECLARE) {
         return true;
     }
 
-    public static boolean searchInVariables(ArrayList<ArrayList<Token>> code) {
+    public static boolean addVariables(ArrayList<ArrayList<Token>> code) {
 
         boolean isSuccess = true;
 

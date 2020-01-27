@@ -9,6 +9,6 @@
 90      PRINT "Imprimindo uma string!"
 100     DEF FN G(X) = X * X / 2
 110     IF X = 0 THEN STOP
-120     IF Y > 3 THEN R
-130     GO TO L1
+120     IF Y > 3 THEN 10
+130     GO TO 40
 140     END
